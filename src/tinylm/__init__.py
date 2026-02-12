@@ -14,20 +14,20 @@ class Markov:
             options.extend([next_char] * count)
         return random.choice(options)
 
-    def get_table(txt: str, size: int = 1) -> dict[str, dict[str, int]]:
-        results: dict[str, dict[str, int]] = {}
-        for i in range(len(txt)):
-            chars = txt[i + i + size]
-            try:
-                out = txt[i + size]
-            except IndexError:
-                break
+def get_table(txt: str, size: int = 1) -> dict[str, dict[str, int]]:
+    results: dict[str, dict[str, int]] = {}
+    for i in range(len(txt)):
+        chars = txt[i : i + size]
+        try:
+            out = txt[i + size]
+        except IndexError:
+            break
 
-            char_dict = results.get(chars, {})
-            char_dict.setdefault(out, 0)
-            char_dict[out] += 1
-            results[char] = char_dict
-        return results
+        char_dict = results.get(chars, {})
+        char_dict.setdefault(out, 0)
+        char_dict[out] += 1
+        results[chars] = char_dict
+    return results
 
 def main() -> None:
     print("Hello from tinylm!")

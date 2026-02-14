@@ -5,6 +5,16 @@ class Markov:
         self.tables = [get_table(txt, size = i + 1) for i in range(size)]
 
     def predict(self, txt: str) -> str:
+        """
+        Given some text, predict the next character
+
+	>>> m = Markov("abc")
+        >>> m.predict("z") # doctest: +ELLIPSIS
+        Traceback (most recent call last):
+          ...
+        KeyError: ...
+
+        """
         table = self.tables[len(txt) - 1]
         next_counts = table.get(txt, {})
         if not next_counts:
@@ -15,6 +25,17 @@ class Markov:
         return random.choice(options)
 
 def get_table(txt: str, size: int = 1) -> dict[str, dict[str, int]]:
+    """
+    Build a transition table form a training string
+ 
+    >>> get_table("xyxz")
+    {'x': {'y': 1, 'z': 1}, 'y': {'x': 1}}
+
+
+    >>> get_table("abab") # doctest: +NORMALIZE_WHITESPACE
+        {'a': {'b': 2}, 'b': {'a': 1}}
+    """
+
     results: dict[str, dict[str, int]] = {}
     for i in range(len(txt)):
         chars = txt[i : i + size]

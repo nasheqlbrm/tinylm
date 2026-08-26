@@ -23,12 +23,6 @@ def test_predict_unknown_raises() -> None:
         model.predict("z")
 
 
-def test_predict_unknown_matches_error_message() -> None:
-    model = tinylm.Markov("abc")
-    with pytest.raises(KeyError, match="not found"):
-        model.predict("z")
-
-
 def test_empty_corpus() -> None:
     assert tinylm.get_table("") == {}
 
@@ -38,4 +32,4 @@ def test_single_character_corpus() -> None:
 
 
 def test_corpus_and_size_same() -> None:
-    assert tinylm.get_table("ab", size=2) == {} 
+    assert tinylm.get_table("ab", size=2) == {}

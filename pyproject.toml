@@ -16,10 +16,6 @@ tinylm = "tinylm:main"
 requires = ["uv_build>=0.12.5,<0.13"]
 build-backend = "uv_build"
 
-[tool.pytest]
-addopts = ["--doctest-modules"]
-doctest_optionflags = "NORMALIZE_WHITESPACE ELLIPSIS IGNORE_EXCEPTION_DETAIL"
-
 [dependency-groups]
 dev = [
     "pytest>=9.0.2",
